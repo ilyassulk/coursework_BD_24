@@ -1,0 +1,54 @@
+package com.example.coursework_bd_24.service.impl;
+
+import com.example.coursework_bd_24.model.Table1;
+import com.example.coursework_bd_24.repository.Table1EagerJPARepository;
+import com.example.coursework_bd_24.repository.Table1JPARepository;
+import com.example.coursework_bd_24.service.DBService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@AllArgsConstructor
+public class JPAN1Service implements DBService {
+
+    private final Table1JPARepository table1JPARepository;
+
+
+    @Override
+    public void saveItem(Table1 item) {
+        table1JPARepository.save(item);
+    }
+
+    @Override
+    public List<Table1> selectAll() {
+        List<Table1> items = table1JPARepository.findAll();
+
+        for (Table1 item : items) {
+            item.getTable2().getWeightData();
+        }
+
+        return items;
+    }
+
+    @Override
+    public List<Table1> selectWhere(String name) {
+        return List.of();
+    }
+
+    @Override
+    public List<Table1> selectAllWithJoin() {
+        return List.of();
+    }
+
+    @Override
+    public void updateItem(Table1 item) {
+
+    }
+
+    @Override
+    public void removeAllItems() {
+        table1JPARepository.deleteAll();
+    }
+}
